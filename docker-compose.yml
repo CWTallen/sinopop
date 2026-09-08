@@ -6,8 +6,6 @@
 #   docker compose --profile monitoring up -d  # 额外带上 prometheus + grafana
 #   docker compose run --rm ingestion          # 手动跑一次抓取（不常驻，配合宿主机 crontab 定时触发）
 #
-# 启动前把 .env.example 复制成 .env 并填好真实值：
-#   cp .env.example .env
 
 networks:
   sinopop:
