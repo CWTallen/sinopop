@@ -1,0 +1,142 @@
+# 华语志 / sinopop-archive
+# 单机 VPS 部署：核心三件套（postgres + app + nginx）默认启动。
+#
+# 用法：
+#   docker compose up -d                      # 只启动核心服务
+#   docker compose --profile monitoring up -d  # 额外带上 prometheus + grafana
+#   docker compose run --rm ingestion          # 手动跑一次抓取（不常驻，配合宿主机 crontab 定时触发）
+#
+# 启动前把 .env.example 复制成 .env 并填好真实值：
+#   cp .env.example .env
+
+networks:
+  sinopop:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  grafana_data:
+
+services:
+
+  # ---------- 数据库 ----------
+  postgres:
+    image: postgres:16-alpine
+    container_name: sinopop-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sinopop}
+      POSTGRES_USER: ${POSTGRES_USER:-sinopop}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 中设置 POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # 只绑定本机回环地址，不对公网暴露 5432；需要本地连库时用 SSH 隧道转发这个端口
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-sinopop} -d ${POSTGRES_DB:-sinopop}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sinopop
+
+  # ---------- 后端：Spring Boot 单体 ----------
+  app:
+    # 本地开发/自己构建镜像用这一行：
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    # CI 打包好之后改用这一行，从 GHCR 拉取，二选一：
+    # image: ghcr.io/<你的github用户名>/sinopop-archive-app:latest
+    container_name: sinopop-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-sinopop}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-sinopop}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 中设置 POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:?请在 .env 中设置 JWT_SECRET}
+      JWT_EXPIRATION_MINUTES: ${JWT_EXPIRATION_MINUTES:-60}
+    # 不直接对公网暴露 8080，统一走 nginx 反代
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - sinopop
+
+  # ---------- 反向代理 + 前端静态资源 ----------
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: sinopop-nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./frontend/dist:/usr/share/nginx/html/sinopop:ro
+      - ./nginx/certs:/etc/nginx/certs:ro   # Let's Encrypt 证书，用 certbot 单独申请/续期
+    networks:
+      - sinopop
+
+  # ---------- 可选：Ingestion / ETL 抓取服务 ----------
+  # 周期性任务，不建议常驻运行；用宿主机 crontab 定时 `docker compose run --rm ingestion` 触发一次即可退出。
+#  ingestion:
+#    profiles: ["ingestion"]
+#    build:
+#      context: ./ingestion
+#      dockerfile: Dockerfile
+#    container_name: sinopop-ingestion
+#    depends_on:
+#      - app
+#      - postgres
+#    environment:
+#      APP_GRPC_HOST: app
+#      APP_GRPC_PORT: 9090
+#    networks:
+#      - sinopop
+#
+#  # ---------- 可选：轻量监控 ----------
+#  prometheus:
+#    profiles: ["monitoring"]
+#    image: prom/prometheus:latest
+#    container_name: sinopop-prometheus
+#    restart: unless-stopped
+#    volumes:
+#      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+#    command:
+#      - "--config.file=/etc/prometheus/prometheus.yml"
+#      - "--storage.tsdb.retention.time=7d"
+#    ports:
+#      - "127.0.0.1:9090:9090"
+#    networks:
+#      - sinopop
+#
+#  grafana:
+#    profiles: ["monitoring"]
+#    image: grafana/grafana:latest
+#    container_name: sinopop-grafana
+#    restart: unless-stopped
+#    depends_on:
+#      - prometheus
+#    environment:
+#      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+#      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/grafana"
+#      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+#    volumes:
+#      - grafana_data:/var/lib/grafana
+#    ports:
+#      - "127.0.0.1:3000:3000"
+#    networks:
+#      - sinopop
