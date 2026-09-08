@@ -61,9 +61,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:?请在 .env 中设置 POSTGRES_PASSWORD}
       JWT_SECRET: ${JWT_SECRET:?请在 .env 中设置 JWT_SECRET}
       JWT_EXPIRATION_MINUTES: ${JWT_EXPIRATION_MINUTES:-60}
-    # 不直接对公网暴露 8080，统一走 nginx 反代
-    expose:
-      - "8080"
+    # 只绑定本机回环地址，宿主机现有 nginx 反代到这个端口；不对公网直接暴露 8080
+    ports:
+      - "127.0.0.1:8080:8080"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health"]
       interval: 15s
@@ -74,69 +74,70 @@ services:
       - sinopop
 
   # ---------- 反向代理 + 前端静态资源 ----------
-  nginx:
-    image: nginx:1.27-alpine
-    container_name: sinopop-nginx
-    restart: unless-stopped
-    depends_on:
-      - app
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./frontend/dist:/usr/share/nginx/html/sinopop:ro
-      - ./nginx/certs:/etc/nginx/certs:ro   # Let's Encrypt 证书，用 certbot 单独申请/续期
-    networks:
-      - sinopop
+  # VPS 上已有一个 nginx 占用了 80/443，暂时不部署这个容器，改用宿主机现有 nginx 反代到 app 的 8080。
+  # nginx:
+  #   image: nginx:1.27-alpine
+  #   container_name: sinopop-nginx
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d:ro
+  #     - ./frontend/dist:/usr/share/nginx/html/sinopop:ro
+  #     - ./nginx/certs:/etc/nginx/certs:ro   # Let's Encrypt 证书，用 certbot 单独申请/续期
+  #   networks:
+  #     - sinopop
 
   # ---------- 可选：Ingestion / ETL 抓取服务 ----------
   # 周期性任务，不建议常驻运行；用宿主机 crontab 定时 `docker compose run --rm ingestion` 触发一次即可退出。
-#  ingestion:
-#    profiles: ["ingestion"]
-#    build:
-#      context: ./ingestion
-#      dockerfile: Dockerfile
-#    container_name: sinopop-ingestion
-#    depends_on:
-#      - app
-#      - postgres
-#    environment:
-#      APP_GRPC_HOST: app
-#      APP_GRPC_PORT: 9090
-#    networks:
-#      - sinopop
-#
-#  # ---------- 可选：轻量监控 ----------
-#  prometheus:
-#    profiles: ["monitoring"]
-#    image: prom/prometheus:latest
-#    container_name: sinopop-prometheus
-#    restart: unless-stopped
-#    volumes:
-#      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-#    command:
-#      - "--config.file=/etc/prometheus/prometheus.yml"
-#      - "--storage.tsdb.retention.time=7d"
-#    ports:
-#      - "127.0.0.1:9090:9090"
-#    networks:
-#      - sinopop
-#
-#  grafana:
-#    profiles: ["monitoring"]
-#    image: grafana/grafana:latest
-#    container_name: sinopop-grafana
-#    restart: unless-stopped
-#    depends_on:
-#      - prometheus
-#    environment:
-#      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
-#      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/grafana"
-#      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
-#    volumes:
-#      - grafana_data:/var/lib/grafana
-#    ports:
-#      - "127.0.0.1:3000:3000"
-#    networks:
-#      - sinopop
+ingestion:
+  profiles: ["ingestion"]
+  build:
+    context: ./ingestion
+    dockerfile: Dockerfile
+  container_name: sinopop-ingestion
+  depends_on:
+    - app
+    - postgres
+  environment:
+    APP_GRPC_HOST: app
+    APP_GRPC_PORT: 9090
+  networks:
+    - sinopop
+
+# ---------- 可选：轻量监控 ----------
+prometheus:
+  profiles: ["monitoring"]
+  image: prom/prometheus:latest
+  container_name: sinopop-prometheus
+  restart: unless-stopped
+  volumes:
+    - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  command:
+    - "--config.file=/etc/prometheus/prometheus.yml"
+    - "--storage.tsdb.retention.time=7d"
+  ports:
+    - "127.0.0.1:9090:9090"
+  networks:
+    - sinopop
+
+grafana:
+  profiles: ["monitoring"]
+  image: grafana/grafana:latest
+  container_name: sinopop-grafana
+  restart: unless-stopped
+  depends_on:
+    - prometheus
+  environment:
+    GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/grafana"
+    GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+  volumes:
+    - grafana_data:/var/lib/grafana
+  ports:
+    - "127.0.0.1:3000:3000"
+  networks:
+    - sinopop
