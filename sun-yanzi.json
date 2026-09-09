@@ -1,0 +1,161 @@
+{
+  "_source_note": "曲目/专辑信息核对自维基百科专辑词条、Discogs、豆瓣音乐等公开资料，仅收录事实性元数据（歌手/专辑/曲目名/年份/曲序），不含歌词正文——歌词版权归词作者/音乐出版方所有，未做任何形式的收录。",
+  "artist": {
+    "id": "sun-yanzi",
+    "name_zh": "孙燕姿",
+    "name_en": "Stefanie Sun",
+    "origin": "新加坡",
+    "debut_year": 2000
+  },
+  "albums": [
+    {
+      "id": "yanzi-2000",
+      "artist_id": "sun-yanzi",
+      "title_zh": "孙燕姿",
+      "title_en": "Yan Zi",
+      "release_year": 2000
+    },
+    {
+      "id": "wxdxf-2000",
+      "artist_id": "sun-yanzi",
+      "title_zh": "我要的幸福",
+      "title_en": "My Desired Happiness",
+      "release_year": 2000
+    },
+    {
+      "id": "fengzheng-2001",
+      "artist_id": "sun-yanzi",
+      "title_zh": "风筝",
+      "title_en": "Kite",
+      "release_year": 2001
+    },
+    {
+      "id": "leave-2002",
+      "artist_id": "sun-yanzi",
+      "title_zh": "离开",
+      "title_en": "Leave",
+      "release_year": 2002
+    },
+    {
+      "id": "wwc-2003",
+      "artist_id": "sun-yanzi",
+      "title_zh": "未完成",
+      "title_en": "To Be Continued...",
+      "release_year": 2003
+    },
+    {
+      "id": "stefanie-2004",
+      "artist_id": "sun-yanzi",
+      "title_zh": "Stefanie",
+      "title_en": "Stefanie",
+      "release_year": 2004
+    },
+    {
+      "id": "wmdyt-2005",
+      "artist_id": "sun-yanzi",
+      "title_zh": "完美的一天",
+      "title_en": "A Perfect Day",
+      "release_year": 2005
+    },
+    {
+      "id": "niguang-2007",
+      "artist_id": "sun-yanzi",
+      "title_zh": "逆光",
+      "title_en": "Against the Light",
+      "release_year": 2007
+    },
+    {
+      "id": "sshh-2011",
+      "artist_id": "sun-yanzi",
+      "title_zh": "是时候",
+      "title_en": "It's Time",
+      "release_year": 2011
+    },
+    {
+      "id": "kepler-2014",
+      "artist_id": "sun-yanzi",
+      "title_zh": "克卜勒",
+      "title_en": "Kepler",
+      "release_year": 2014
+    },
+    {
+      "id": "tiaowu-2017",
+      "artist_id": "sun-yanzi",
+      "title_zh": "跳舞的梵谷",
+      "title_en": "No. 13 – A Dancing Van Gogh",
+      "release_year": 2017
+    }
+  ],
+  "songs": [
+    { "id": "yanzi-2000-01", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "超快感", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-02", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "爱情证书", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-03", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 3,  "title_zh": "天黑黑", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-04", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 4,  "title_zh": "E-Lover", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-05", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "浓眉毛", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-06", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 6,  "title_zh": "和平", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-07", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 7,  "title_zh": "自然", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-08", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 8,  "title_zh": "终于", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-09", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 9,  "title_zh": "很好", "lyrics_status": "not_included_copyright" },
+    { "id": "yanzi-2000-10", "album_id": "yanzi-2000", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "Leave Me Alone", "lyrics_status": "not_included_copyright" },
+
+    { "id": "wxdxf-2000-02", "album_id": "wxdxf-2000", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "我要的幸福", "lyrics_status": "not_included_copyright" },
+    { "id": "wxdxf-2000-05", "album_id": "wxdxf-2000", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "开始懂了", "lyrics_status": "not_included_copyright" },
+    { "id": "wxdxf-2000-07", "album_id": "wxdxf-2000", "artist_id": "sun-yanzi", "track_number": 7,  "title_zh": "相信", "lyrics_status": "not_included_copyright" },
+    { "id": "wxdxf-2000-10", "album_id": "wxdxf-2000", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "害怕", "lyrics_status": "not_included_copyright" },
+    { "id": "wxdxf-2000-11", "album_id": "wxdxf-2000", "artist_id": "sun-yanzi", "track_number": 11, "title_zh": "星期一天气晴我离开你", "lyrics_status": "not_included_copyright" },
+
+    { "id": "fengzheng-2001-01", "album_id": "fengzheng-2001", "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "绿光", "lyrics_status": "not_included_copyright" },
+    { "id": "fengzheng-2001-02", "album_id": "fengzheng-2001", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "风筝", "lyrics_status": "not_included_copyright" },
+    { "id": "fengzheng-2001-03", "album_id": "fengzheng-2001", "artist_id": "sun-yanzi", "track_number": 3,  "title_zh": "任性", "lyrics_status": "not_included_copyright" },
+    { "id": "fengzheng-2001-05", "album_id": "fengzheng-2001", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "不是真的爱我", "lyrics_status": "not_included_copyright" },
+    { "id": "fengzheng-2001-10", "album_id": "fengzheng-2001", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "我是我", "lyrics_status": "not_included_copyright" },
+
+    { "id": "leave-2002-02", "album_id": "leave-2002", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "我不爱", "lyrics_status": "not_included_copyright" },
+    { "id": "leave-2002-03", "album_id": "leave-2002", "artist_id": "sun-yanzi", "track_number": 3,  "title_zh": "懂事", "lyrics_status": "not_included_copyright" },
+    { "id": "leave-2002-04", "album_id": "leave-2002", "artist_id": "sun-yanzi", "track_number": 4,  "title_zh": "直来直往", "lyrics_status": "not_included_copyright" },
+    { "id": "leave-2002-05", "album_id": "leave-2002", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "一样的夏天", "lyrics_status": "not_included_copyright" },
+    { "id": "leave-2002-10", "album_id": "leave-2002", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "Leave", "lyrics_status": "not_included_copyright" },
+
+    { "id": "wwc-2003-01", "album_id": "wwc-2003", "artist_id": "sun-yanzi", "track_number": 1, "title_zh": "神奇", "lyrics_status": "not_included_copyright" },
+    { "id": "wwc-2003-02", "album_id": "wwc-2003", "artist_id": "sun-yanzi", "track_number": 2, "title_zh": "我不难过", "lyrics_status": "not_included_copyright" },
+    { "id": "wwc-2003-03", "album_id": "wwc-2003", "artist_id": "sun-yanzi", "track_number": 3, "title_zh": "永远", "lyrics_status": "not_included_copyright" },
+    { "id": "wwc-2003-04", "album_id": "wwc-2003", "artist_id": "sun-yanzi", "track_number": 4, "title_zh": "未完成", "lyrics_status": "not_included_copyright" },
+    { "id": "wwc-2003-06", "album_id": "wwc-2003", "artist_id": "sun-yanzi", "track_number": 6, "title_zh": "学会", "lyrics_status": "not_included_copyright" },
+
+    { "id": "stefanie-2004-02", "album_id": "stefanie-2004", "artist_id": "sun-yanzi", "track_number": 2, "title_zh": "我的爱", "lyrics_status": "not_included_copyright" },
+    { "id": "stefanie-2004-05", "album_id": "stefanie-2004", "artist_id": "sun-yanzi", "track_number": 5, "title_zh": "听见", "lyrics_status": "not_included_copyright" },
+    { "id": "stefanie-2004-06", "album_id": "stefanie-2004", "artist_id": "sun-yanzi", "track_number": 6, "title_zh": "慢慢来", "lyrics_status": "not_included_copyright" },
+    { "id": "stefanie-2004-07", "album_id": "stefanie-2004", "artist_id": "sun-yanzi", "track_number": 7, "title_zh": "同类", "lyrics_status": "not_included_copyright" },
+    { "id": "stefanie-2004-09", "album_id": "stefanie-2004", "artist_id": "sun-yanzi", "track_number": 9, "title_zh": "反过来走走", "lyrics_status": "not_included_copyright" },
+
+    { "id": "wmdyt-2005-01",  "album_id": "wmdyt-2005",  "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "完美的一天", "lyrics_status": "not_included_copyright" },
+    { "id": "wmdyt-2005-03",  "album_id": "wmdyt-2005",  "artist_id": "sun-yanzi", "track_number": 3,  "title_zh": "隐形人", "lyrics_status": "not_included_copyright" },
+    { "id": "wmdyt-2005-07",  "album_id": "wmdyt-2005",  "artist_id": "sun-yanzi", "track_number": 7,  "title_zh": "心愿", "lyrics_status": "not_included_copyright" },
+    { "id": "wmdyt-2005-09",  "album_id": "wmdyt-2005",  "artist_id": "sun-yanzi", "track_number": 9,  "title_zh": "梦不落", "lyrics_status": "not_included_copyright" },
+    { "id": "wmdyt-2005-10",  "album_id": "wmdyt-2005",  "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "明天晴天", "lyrics_status": "not_included_copyright" },
+
+    { "id": "niguang-2007-02", "album_id": "niguang-2007", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "逆光", "lyrics_status": "not_included_copyright" },
+    { "id": "niguang-2007-05", "album_id": "niguang-2007", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "我怀念的", "lyrics_status": "not_included_copyright" },
+    { "id": "niguang-2007-06", "album_id": "niguang-2007", "artist_id": "sun-yanzi", "track_number": 6,  "title_zh": "安宁", "lyrics_status": "not_included_copyright" },
+    { "id": "niguang-2007-10", "album_id": "niguang-2007", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "需要你", "lyrics_status": "not_included_copyright" },
+    { "id": "niguang-2007-11", "album_id": "niguang-2007", "artist_id": "sun-yanzi", "track_number": 11, "title_zh": "关于", "lyrics_status": "not_included_copyright" },
+
+    { "id": "sshh-2011-01", "album_id": "sshh-2011", "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "世说心语", "lyrics_status": "not_included_copyright" },
+    { "id": "sshh-2011-02", "album_id": "sshh-2011", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "追", "lyrics_status": "not_included_copyright" },
+    { "id": "sshh-2011-04", "album_id": "sshh-2011", "artist_id": "sun-yanzi", "track_number": 4,  "title_zh": "时光小偷", "lyrics_status": "not_included_copyright" },
+    { "id": "sshh-2011-08", "album_id": "sshh-2011", "artist_id": "sun-yanzi", "track_number": 8,  "title_zh": "快疯了", "lyrics_status": "not_included_copyright" },
+    { "id": "sshh-2011-10", "album_id": "sshh-2011", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "是时候", "lyrics_status": "not_included_copyright" },
+
+    { "id": "kepler-2014-01", "album_id": "kepler-2014", "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "克卜勒", "lyrics_status": "not_included_copyright" },
+    { "id": "kepler-2014-02", "album_id": "kepler-2014", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "渴", "lyrics_status": "not_included_copyright" },
+    { "id": "kepler-2014-04", "album_id": "kepler-2014", "artist_id": "sun-yanzi", "track_number": 4,  "title_zh": "尚好的青春", "lyrics_status": "not_included_copyright" },
+    { "id": "kepler-2014-09", "album_id": "kepler-2014", "artist_id": "sun-yanzi", "track_number": 9,  "title_zh": "比较幸福", "lyrics_status": "not_included_copyright" },
+    { "id": "kepler-2014-10", "album_id": "kepler-2014", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "雨还是不停地落下", "lyrics_status": "not_included_copyright" },
+
+    { "id": "tiaowu-2017-01", "album_id": "tiaowu-2017", "artist_id": "sun-yanzi", "track_number": 1,  "title_zh": "风衣", "lyrics_status": "not_included_copyright" },
+    { "id": "tiaowu-2017-02", "album_id": "tiaowu-2017", "artist_id": "sun-yanzi", "track_number": 2,  "title_zh": "我很愉快", "lyrics_status": "not_included_copyright" },
+    { "id": "tiaowu-2017-03", "album_id": "tiaowu-2017", "artist_id": "sun-yanzi", "track_number": 3,  "title_zh": "跳舞的梵谷", "lyrics_status": "not_included_copyright" },
+    { "id": "tiaowu-2017-05", "album_id": "tiaowu-2017", "artist_id": "sun-yanzi", "track_number": 5,  "title_zh": "天天年年", "lyrics_status": "not_included_copyright" },
+    { "id": "tiaowu-2017-10", "album_id": "tiaowu-2017", "artist_id": "sun-yanzi", "track_number": 10, "title_zh": "极美", "lyrics_status": "not_included_copyright" }
+  ]
+}
